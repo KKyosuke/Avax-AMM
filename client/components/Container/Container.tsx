@@ -1,15 +1,20 @@
-import { useState } from "react";
-import { useContract } from "../../hooks/useContract";
+import {useState} from "react";
+import {useContract} from "@/hooks/useContract";
 import styles from "./Container.module.css";
 import Details from "../Details/Details";
+import Swap from "../SelectTab/Swap";
+import Provide from "../SelectTab/Provide";
+import Withdraw from "../SelectTab/Withdraw";
+import Faucet from "../SelectTab/Faucet";
+
 type Props = {
   currentAccount: string | undefined;
 };
 
-export default function Container({ currentAccount }: Props) {
+export default function Container({currentAccount}: Props) {
   const [activeTab, setActiveTab] = useState("Swap");
   const [updateDetailsFlag, setUpdateDetailsFlag] = useState(0);
-  const { usdc: token0, joe: token1, amm } = useContract(currentAccount);
+  const {usdc: token0, joe: token1, amm} = useContract(currentAccount);
 
   const changeTab = (tab: string) => {
     setActiveTab(tab);
@@ -65,11 +70,41 @@ export default function Container({ currentAccount }: Props) {
             Faucet
           </div>
         </div>
-
-        {activeTab === "Swap" && <div>swap</div>}
-        {activeTab === "Provide" && <div>provide</div>}
-        {activeTab === "Withdraw" && <div>withdraw</div>}
-        {activeTab === "Faucet" && <div>faucet</div>}
+        {activeTab === "Swap" && (
+          <Swap
+            token0={token0}
+            token1={token1}
+            amm={amm}
+            currentAccount={currentAccount}
+            updateDetails={updateDetails}
+          />
+        )}
+        {activeTab === "Provide" && (
+          <Provide
+            token0={token0}
+            token1={token1}
+            amm={amm}
+            currentAccount={currentAccount}
+            updateDetails={updateDetails}
+          />
+        )}
+        {activeTab === "Withdraw" && (
+          <Withdraw
+            token0={token0}
+            token1={token1}
+            amm={amm}
+            currentAccount={currentAccount}
+            updateDetails={updateDetails}
+          />
+        )}
+        {activeTab === "Faucet" && (
+          <Faucet
+            token0={token0}
+            token1={token1}
+            currentAccount={currentAccount}
+            updateDetails={updateDetails}
+          />
+        )}
       </div>
       <Details
         token0={token0}

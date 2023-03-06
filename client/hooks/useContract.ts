@@ -1,14 +1,14 @@
 import {useEffect, useState} from "react";
-import {BigNumber, ethers, BrowserProvider} from "ethers";
+import {BigNumber, ethers} from "ethers";
 import UsdcArtifact from "../utils/USDCToken.json";
 import JoeArtifact from "../utils/JOEToken.json";
 import AmmArtifact from "../utils/AMM.json";
 import {AMM as AmmContractType, JOEToken as JoeContractType, USDCToken as UsdcContractType} from "../typechain-types";
 import {getEthereum} from "@/utils/ethereum";
 
-export const UsdcAddress = "0xeF7cA80cbbE0f5c14Ed7aB91e7a5fF53244Ea6DA";
-export const JoeAddress = "0x19Ccd61A49da0a9702E37fd9fb14c725388c71D3";
-export const AmmAddress = "0xC2Fa1000f45B0705BcD06eCf180ca1cC5fdA4668";
+export const UsdcAddress = "0xE906BcD6f604ffa88C1FF607D4492fd58EEBce70";
+export const JoeAddress = "0x0C3f59ECCe74e74C85A15e2Ff2A34fCa0f1087c3";
+export const AmmAddress = "0x6f208c183294af6dEbF4cb6180Ad35F05306DDeF";
 
 export type TokenType = {
   symbol: string;
@@ -62,6 +62,7 @@ export const useContract = (
 
   const generateUsdc = async (contract: UsdcContractType) => {
     try {
+      console.error("generateUsdc")
       const symbol = await contract.symbol();
       setUsdc({symbol: symbol, contract: contract} as TokenType);
     } catch (error) {
@@ -71,6 +72,7 @@ export const useContract = (
 
   const generateJoe = async (contract: UsdcContractType) => {
     try {
+      console.error("generateJoe")
       const symbol = await contract.symbol();
       setJoe({symbol: symbol, contract: contract} as TokenType);
     } catch (error) {
@@ -80,6 +82,7 @@ export const useContract = (
 
   const generateAmm = async (contract: AmmContractType) => {
     try {
+      console.error("generateAmm")
       const precision = await contract.PRECISION();
       setAmm({sharePrecision: precision, contract: contract} as AmmType);
     } catch (error) {
