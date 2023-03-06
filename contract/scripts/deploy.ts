@@ -1,24 +1,33 @@
 import { ethers } from "hardhat";
 
-async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
+async function deploy() {
+  // コントラクトをデプロイするアカウントのアドレスを取得します。
+  const [deployer] = await ethers.getSigners();
 
-  const lockedAmount = ethers.utils.parseEther("0.001");
+  // USDCトークンのコントラクトをデプロイします。
+  const USDCToken = await ethers.getContractFactory("USDCToken");
+  const usdc = await USDCToken.deploy();
+  await usdc.deployed();
 
-  const Lock = await ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  // JOEトークンのコントラクトをデプロイします。
+  const JOEToken = await ethers.getContractFactory("JOEToken");
+  const joe = await JOEToken.deploy();
+  await joe.deployed();
 
-  await lock.deployed();
+  // AMMコントラクトをデプロイします。
+  const AMM = await ethers.getContractFactory("AMM");
+  const amm = await AMM.deploy(usdc.address, joe.address);
+  await amm.deployed();
 
-  console.log(
-    `Lock with ${ethers.utils.formatEther(lockedAmount)}ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
-  );
+  console.log("usdc address:", usdc.address);
+  console.log("joe address:", joe.address);
+  console.log("amm address:", amm.address);
+  console.log("account address that deploy contract:", deployer.address);
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+deploy()
+  .then(() => process.exit(0))
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });

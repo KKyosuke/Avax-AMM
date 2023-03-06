@@ -1,15 +1,23 @@
-import {useState} from "react";
+import { useState } from "react";
+import { useContract } from "../../hooks/useContract";
 import styles from "./Container.module.css";
-
+import Details from "../Details/Details";
 type Props = {
   currentAccount: string | undefined;
 };
 
-export default function Container({currentAccount}: Props) {
+export default function Container({ currentAccount }: Props) {
   const [activeTab, setActiveTab] = useState("Swap");
+  const [updateDetailsFlag, setUpdateDetailsFlag] = useState(0);
+  const { usdc: token0, joe: token1, amm } = useContract(currentAccount);
 
   const changeTab = (tab: string) => {
     setActiveTab(tab);
+  };
+
+  const updateDetails = () => {
+    // フラグを0と1の間で交互に変更します。
+    setUpdateDetailsFlag((updateDetailsFlag + 1) % 2);
   };
 
   return (
@@ -63,7 +71,13 @@ export default function Container({currentAccount}: Props) {
         {activeTab === "Withdraw" && <div>withdraw</div>}
         {activeTab === "Faucet" && <div>faucet</div>}
       </div>
-      details
+      <Details
+        token0={token0}
+        token1={token1}
+        amm={amm}
+        currentAccount={currentAccount}
+        updateDetailsFlag={updateDetailsFlag}
+      />
     </div>
   );
 }
