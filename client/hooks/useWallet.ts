@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getEthereum} from "@/utils/ethereum";
+import {getEthereum} from "../utils/ethereum";
 
 type ReturnUseWallet = {
   currentAccount: string | undefined;

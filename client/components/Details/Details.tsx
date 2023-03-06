@@ -1,8 +1,8 @@
 import {useCallback, useEffect, useState} from "react";
 import styles from "./Details.module.css";
-import {AmmType, TokenType} from "@/hooks/useContract";
+import {AmmType, TokenType} from "../../hooks/useContract";
 import {ethers} from "ethers";
-import {formatWithoutPrecision} from "@/utils/format";
+import {formatWithoutPrecision} from "../../utils/format";
 
 type Props = {
   token0: TokenType | undefined;

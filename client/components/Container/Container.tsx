@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {useContract} from "@/hooks/useContract";
+import {useContract} from "../../hooks/useContract";
 import styles from "./Container.module.css";
 import Details from "../Details/Details";
 import Swap from "../SelectTab/Swap";

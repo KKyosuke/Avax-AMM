@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
-import {AmmType, TokenType} from "@/hooks/useContract";
+import {AmmType, TokenType} from "../../hooks/useContract";
 import {MdSwapVert} from "react-icons/md";
 import styles from "./SelectTab.module.css";
 import InputNumberBox from "../InputBox/InputNumberBox";
 import {ethers} from "ethers";
-import {validAmount} from "@/utils/validAmount";
+import {validAmount} from "../../utils/validAmount";
 
 type Props = {
   token0: TokenType | undefined;

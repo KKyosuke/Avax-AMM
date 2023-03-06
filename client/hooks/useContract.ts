@@ -4,7 +4,7 @@ import UsdcArtifact from "../utils/USDCToken.json";
 import JoeArtifact from "../utils/JOEToken.json";
 import AmmArtifact from "../utils/AMM.json";
 import {AMM as AmmContractType, JOEToken as JoeContractType, USDCToken as UsdcContractType} from "../typechain-types";
-import {getEthereum} from "@/utils/ethereum";
+import {getEthereum} from "../utils/ethereum";
 
 export const UsdcAddress = "0xE906BcD6f604ffa88C1FF607D4492fd58EEBce70";
 export const JoeAddress = "0x0C3f59ECCe74e74C85A15e2Ff2A34fCa0f1087c3";

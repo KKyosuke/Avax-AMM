@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
-import {TokenType} from "@/hooks/useContract";
+import {TokenType} from "../../hooks/useContract";
 import styles from "./SelectTab.module.css";
 import InputNumberBox from "../InputBox/InputNumberBox";
 import {ethers} from "ethers";
-import {validAmount} from "@/utils/validAmount";
+import {validAmount} from "../../utils/validAmount";
 
 type Props = {
   token0: TokenType | undefined;
